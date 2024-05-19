@@ -76,8 +76,7 @@ packages:
   - package: calogica/dbt_date
     version: 0.9.1
 ```  
-- Save the file, after you have done that, you can go to your terminal and type `dbt run -m dim_agent` to build the model.
-    - Go to Snowflake to see the newly created table!
+- Save the file, after you have done that, you can go to your terminal and type `dbt deps` to install dbt dependencies
 
 - Right click on the models directory and create a new folder inside of it. (Be careful not to create it inside of the example directory.)
 - Call this new folder `insurance`
@@ -124,6 +123,7 @@ email,
 phone
 FROM {{ source('insurance_landing', 'agents') }}
 ```
+- Save the file and run `dbt build --select dim_agent` in the terminal to build the model.
 
 #### dim customer ####
 - Create a new file inside of the insurance directory called `dim_customer.sql`
