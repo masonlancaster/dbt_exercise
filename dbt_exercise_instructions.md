@@ -103,7 +103,7 @@ sources:
 }}
 
 SELECT
-{{ dbt_utils.generate_surrogate_key(['agentid', 'phone']) }} as agent_key,
+agentid as agent_key,
 agentid,
 firstname,
 lastname,
@@ -132,7 +132,7 @@ packages:
 
 
 select
-{{ dbt_utils.generate_surrogate_key(['customerid', 'firstname']) }} as customer_key,
+customerid as customer_key,
 customerid,
 firstname,
 lastname,
@@ -159,7 +159,7 @@ FROM {{ source('insurance_landing', 'customers') }}
 
 
 select
-{{ dbt_utils.generate_surrogate_key(['policyid', 'policytype']) }} as policy_key,
+policyid as policy_key,
 policyid,
 policytype
 FROM {{ source('insurance_landing', 'policies') }}
