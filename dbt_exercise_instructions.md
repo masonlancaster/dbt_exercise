@@ -66,6 +66,19 @@
 
 {%- endmacro %}
 ```
+
+- Create a packages.yml file in the same folder as your dbt_project.yml file. Paste this in the packages.yml file:
+```
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.1.1
+
+  - package: calogica/dbt_date
+    version: 0.9.1
+```  
+- Save the file, after you have done that, you can go to your terminal and type `dbt run -m dim_agent` to build the model.
+    - Go to Snowflake to see the newly created table!
+
 - Right click on the models directory and create a new folder inside of it. (Be careful not to create it inside of the example directory.)
 - Call this new folder `insurance`
 - Right click on insurance and create a new file. Name this file `_src_insurance.yml`
@@ -111,17 +124,6 @@ email,
 phone
 FROM {{ source('insurance_landing', 'agents') }}
 ```
-- The dbt_utils macro comes from the below package. Create a packages.yml file in the same folder as your dbt_project.yml file. Paste this in the packages.yml file:
-```
-packages:
-  - package: dbt-labs/dbt_utils
-    version: 1.1.1
-
-  - package: calogica/dbt_date
-    version: 0.9.1
-```  
-- Save the file, after you have done that, you can go to your terminal and type `dbt run -m dim_agent` to build the model.
-    - Go to Snowflake to see the newly created table!
 
 #### dim customer ####
 - Create a new file inside of the insurance directory called `dim_customer.sql`
