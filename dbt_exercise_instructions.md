@@ -45,7 +45,7 @@
 
 ### Transform (dbt) ###
 - Open VSCode
-- File > Open > Select your project (lastname_DW)
+- File > Open > Select your project (lastname_DW, or whatever you named your dbt project)
 - On the top bar of the application, select Terminal > New Terminal
     - This will open a terminal in the directory of your project within VSCode
 - Right click on the macros directory and create a new file called `generate_schema_name.sql`. This macro will allow us to use custom schemas when we create models.
@@ -258,5 +258,5 @@ models:
 
 ## Create a semantic layer model (time permitting)
 - Create a model that can query from the data warehouse we just built and reference upstream models.
-- Create a new file called `sem_claims.sql` inside of the insurance directory.
+- Create a new file called `claims.sql` inside of the insurance directory.
 - In order to view lineage, the dbt power user extension must be installed. Click on the Lineage tab in vscode (down by the terminal on the bottom), if you are inside the sem_claims.sql model, you should be able to see lineage for that model. View the lineage for the other files in the model as well. 
