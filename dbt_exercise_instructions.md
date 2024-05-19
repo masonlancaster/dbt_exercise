@@ -241,7 +241,7 @@ INNER JOIN {{ ref('dim_date') }} d ON d.date_day = c.ClaimDate
 
 - If for some reason you need to run all files then you can run: `dbt run -m insurance`.
 
-#### schema yaml file ####
+#### Model Attributes YAML file ####
 - Create a new file inside the insurance directory called `_schema_insurance.yml`
 - This file contains metadata about the models you build. It is not required, but highly encouraged by dbt to document your models. It's a lot of tedious work so doesn't seem super necessary for this exercise, but building the file is still a good habit to get into.
 - Structure the file just like the following code:
