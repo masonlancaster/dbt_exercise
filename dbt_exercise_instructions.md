@@ -27,7 +27,7 @@
 
 - Once Airbyte has run the connection test successfully, you will pick a destination, select `Pick a destination`.
 - Find and click on `Snowflake`
-    - Host: `https://rbb67081.snowflakecomputing.com` 
+    - Host: `https://etb90388.snowflakecomputing.com` 
     - Role: `TRAINING_ROLE` 
     - Warehouse: `lastname_WH` 
     - Database: `firstnamelastname` 
