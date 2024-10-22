@@ -72,7 +72,7 @@ version: 2
 
 sources:
   - name: oliver_landing
-    database: airbyte_landing
+    database: (YourDatabase - FirstnameLastname)
     schema: oliver
     tables:
       - name: customer
