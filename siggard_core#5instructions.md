@@ -212,7 +212,7 @@ FROM {{ source('oliver_landing', 'store') }}
 
 
 #### fact sales ####
-- Create a new file inside of the oliver directory called `fact_sales.sql`
+- Create a new file inside of the oliver directory called `oliver_fact_sales.sql`
 - Populate the code that we will use in this file below: 
 ```
 {{ config(
@@ -267,7 +267,7 @@ models:
 
 ## Create a semantic layer model (2 points of EC!)
 - Create a model that can query from the data warehouse we just built and reference upstream models.
-- Create a new file called `sales.sql` inside of the oliver directory.
+- Create a new file called `oliver_sales.sql` inside of the oliver directory.
 - Basically, your code will create a new table that will be a semantic layer that is easy for consumption. The table should include key information that an analyst could easily pull from to run quick analysis. 
 - This model should use 'ref' instead of source in the from statements. This will allow dbt to build lineage dag of the model dependencies:
 - Populate the code that we will use in this file below: 
