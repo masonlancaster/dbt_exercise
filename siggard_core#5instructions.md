@@ -261,13 +261,13 @@ models:
     description: "Oliver Store Dimension"
   - name: oliver_fact_sales
     description: "Oliver Sales Fact"
-  - name: oliver_sem_sales
+  - name: oliver_sales
     description: "Semantic table showing each order placed by a customer"
 ```
 
 ## Create a semantic layer model (2 points of EC!)
 - Create a model that can query from the data warehouse we just built and reference upstream models.
-- Create a new file called `sem_sales.sql` inside of the oliver directory.
+- Create a new file called `sales.sql` inside of the oliver directory.
 - Basically, your code will create a new table that will be a semantic layer that is easy for consumption. The table should include key information that an analyst could easily pull from to run quick analysis. 
 - This model should use 'ref' instead of source in the from statements. This will allow dbt to build lineage dag of the model dependencies:
 - Populate the code that we will use in this file below: 
