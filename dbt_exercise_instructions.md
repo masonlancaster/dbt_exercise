@@ -264,4 +264,4 @@ models:
 ## Create a semantic layer model (time permitting)
 - Create a model that can query from the data warehouse we just built and reference upstream models.
 - Create a new file called `claims.sql` inside of the insurance directory.
-- In order to view lineage, the dbt power user extension must be installed. Click on the Lineage tab in vscode (down by the terminal on the bottom), if you are inside the sem_claims.sql model, you should be able to see lineage for that model. View the lineage for the other files in the model as well. 
+- In order to view lineage, the dbt power user extension must be installed. Click on the Lineage tab in vscode (down by the terminal on the bottom), if you are inside the claims.sql model, you should be able to see lineage for that model. View the lineage for the other files in the model as well. 
