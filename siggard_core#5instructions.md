@@ -72,7 +72,7 @@ version: 2
 
 sources:
   - name: oliver_landing
-    database: (YourDatabase - FirstnameLastname)
+    database: (YourDatabaseHere - FirstnameLastname)
     schema: oliver
     tables:
       - name: customer
