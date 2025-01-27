@@ -27,7 +27,7 @@
 
 - Once Airbyte has run the connection test successfully, you will pick a destination, select `Pick a destination`.
 - Find and click on `Snowflake`
-    - Host: `https://etb90388.snowflakecomputing.com` 
+    - Host: `insert snowflake link here` 
     - Role: `TRAINING_ROLE` 
     - Warehouse: `lastname_WH` 
     - Database: `firstnamelastname` 
@@ -44,10 +44,20 @@
     - Once it's done, go to Snowflake and verify that you see data in the landing database
 
 ### Transform (dbt) ###
-- Open VSCode
+<!-- - Open VSCode
 - File > Open > Select your project (lastname_DW, or whatever you named your dbt project)
 - On the top bar of the application, select Terminal > New Terminal
     - This will open a terminal in the directory of your project within VSCode
+- Right click on the macros directory and create a new file called `generate_schema_name.sql`. This macro will allow us to use custom schemas when we create models.
+    - Copy and paste the following code into the newly created macro file: -->
+- Login to dbt Cloud
+- Click Develop > Cloud IDE
+- Before making any changes, we need to open an new git branch.
+    - Go to the repository for your project in GitHub
+    - Create a new branch by clicking branches > new branch
+        - Name the branch `dbt-exercise`
+- Go back to the dbt Cloud IDE
+    - Click Change branch > select your new branch and click `Checkout`
 - Right click on the macros directory and create a new file called `generate_schema_name.sql`. This macro will allow us to use custom schemas when we create models.
     - Copy and paste the following code into the newly created macro file:
 ```
@@ -264,4 +274,23 @@ models:
 ## Create a semantic layer model (time permitting)
 - Create a model that can query from the data warehouse we just built and reference upstream models.
 - Create a new file called `claims.sql` inside of the insurance directory.
-- In order to view lineage, the dbt power user extension must be installed. Click on the Lineage tab in vscode (down by the terminal on the bottom), if you are inside the claims.sql model, you should be able to see lineage for that model. View the lineage for the other files in the model as well. 
+<!-- - In order to view lineage, the dbt power user extension must be installed. Click on the Lineage tab in vscode (down by the terminal on the bottom), if you are inside the claims.sql model, you should be able to see lineage for that model. View the lineage for the other files in the model as well.  -->
+
+## View Lineage and Generate Docs ##
+- View Lineage for your semantic layer model by clicking on the model in the file explorer and clicking lineage on the bottom window.
+- Submit a screenshot of the DAG.
+- Run `dbt docs generate` in the command line
+- Click the docs icon to the right of the `Change branch` link.
+- Select the claims model from the project explorer on the left.
+
+## Create a Pull Request on GitHub for the changes you have made ##
+- Click Save on any files that you have made changes in.
+- Click `Commit and Sync`
+- Type a commit message explaining the changes you've made. Click `Commit Changes`.
+- Click `Create a pull request on GitHub`
+    - You will be redirected to GitHub
+- Review your changes and click `Create pull request`
+- Type a description about the changes you are proposing to the project.
+- Click `Create Pull Request`
+- Before merging the Pull Request, you need to get 1 reviewer from someone in the class.
+- Copy the link for this page from your browser and link it to the discussion post. Ask for someone to review your pull request. Once someone has appoved your pull request, you can merge it into the main branch by clicking `Merge pull request`.
