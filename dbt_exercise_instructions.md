@@ -4,60 +4,40 @@
 ![alt text](insurancedimensionalmodel.png)
 
 - Now, we are going to use a semi-normalized transactional database given to us by Sarah's insurance company. Let's work through an ELT process for Sarah's insurance company using Airbyte and dbt. 
-### Extract and Load (Airbyte) ###
-- Ensure that you are connected to the University VPN
-- Open the Docker application
-- Start Airbyte by opening a terminal and running the following (you may be able to just click the local host link below instead of running the following):
-``` cd airbyte ```
-``` ./run-ab-platform.sh ```
-- Open up a browser and go to http://localhost:8000. It can take a while for the Airbyte service to start, so don't be surprised if it takes ~10 minutes.
-    - Username: airbyte
-    - Password: password
-- Click `Set up a new source`
-- When defining a source, select `Microsoft SQL Server (MSSQL)`
-    - Host: `stairway.usu.edu`
-    - Port: `1433`
-    - Database: `5360_insurance2`
-    - Username: `5360_student`
-    - Password: `datawarehousing` (you'll need to click the dropdown for optional fields)
-- Select `Scan Changes with User Defined Cursor`
-- Click `Set up source`
-    - Airbyte will run a connection test on the source to make sure it is set up properly
-- Create a schema in your firstnamelastname database named `Insurance` and ensure you have a data warehouse named `lastname_wh`
-
-- Once Airbyte has run the connection test successfully, you will pick a destination, select `Pick a destination`.
-- Find and click on `Snowflake`
-    - Host: `insert snowflake link here` 
-    - Role: `TRAINING_ROLE` 
-    - Warehouse: `lastname_WH` 
-    - Database: `firstnamelastname` 
-    - Schema: `INSURANCE` (create this schema in your firstnamelastname database)
-    - Username: 
-    - Authorization Method: `Username and Password`
-    - Password: 
-    - Click `Set up destination`
-- Once the connection test passes, it will pull up the new connection window
-    - Change schedule type to `Manual`
-    - Under `Activate the streams you want to sync`, click the button next to each table.
-    - Click Set up connection
-    - Click `Sync now`
-    - Once it's done, go to Snowflake and verify that you see data in the landing database
+### Extract and Load (FiveTran) ###
+- Sign into fivetran
+- Click on 'Connections'
+    - Click 'Add Connection'
+- Search for and select 'Amazon RDS for PostgreSQL'
+- Select the destination you previously set up for Snowflake
+- Set the Destination schema prefix to `insurance`
+- Set the Host to `database-1.c3ckkcekkkxp.us-east-1.rds.amazonaws.com`
+- Set the user to `fivetran_usr`
+- Set the password to `dw_fivetran`
+- Set the database to `insurance`
+- Set Update Method to 'Detect Changes via Fivetran Teleport Sync'
+- Click 'Save & Test'
+- Click 'Continue' even if it says 'XMIN extensions not enabled'
+- When you get to the Select Data to Sync page, make sure that the following 4 tables are selected and click 'Save & Continue':
+    - agents
+    - claims
+    - customers
+    - policies
+- Choose to allow all changes
+- Click 'Sync Now' in the top right corner
+- Wait for the sync to finish, login to Snowflake, check to see if you have a new schema in your database called `insurance_dw_source`
+    - Confirm that the tables created and that they have data
+- Go back to fivetran, click on connectors on the left hand side, click your connector that you just set up
+    - Make sure the toggle on the top right is set to paused. If it's set to enabled, then click it and change it to paused.
 
 ### Transform (dbt) ###
-<!-- - Open VSCode
-- File > Open > Select your project (lastname_DW, or whatever you named your dbt project)
-- On the top bar of the application, select Terminal > New Terminal
-    - This will open a terminal in the directory of your project within VSCode
-- Right click on the macros directory and create a new file called `generate_schema_name.sql`. This macro will allow us to use custom schemas when we create models.
-    - Copy and paste the following code into the newly created macro file: -->
 - Login to dbt Cloud
 - Click Develop > Cloud IDE
-- Before making any changes, we need to open an new git branch.
-    - Go to the repository for your project in GitHub
-    - Create a new branch by clicking branches > new branch
-        - Name the branch `dbt-exercise`
-- Go back to the dbt Cloud IDE
-    - Click Change branch > select your new branch and click `Checkout`
+- Click Initialize dbt project
+    - All of the necessary dbt files and folders will be created
+- Click Commit and sync
+- Click 'Create New Branch'
+    - Name the branch `dbt-exercise`
 - Right click on the macros directory and create a new file called `generate_schema_name.sql`. This macro will allow us to use custom schemas when we create models.
     - Copy and paste the following code into the newly created macro file:
 ```
@@ -99,19 +79,13 @@ version: 2
 sources:
   - name: insurance_landing
     database: firstnamelastname
-    schema: insurance
+    schema: insurance_dw_source
     tables:
-      - name: agentpolicy
       - name: agents
       - name: claims
       - name: customers
       - name: policies
 ```
-
-- If you need to make any changes to your Snowflake information in your dbt project you can change it by going to your dbt profile.yml file. You may need to change the schema. 
-    - On a mac, this is located under your user directory. You have to click Shift + command + . in order to see hidden folders. The .dbt folder will appear and inside is profiles.yml
-    - On Windows, it's just in the user directory under the .dbt folder and the profiles.yml is inside.
-    - Once you have found the profiles.yml file you can open in a text editor, change the needed parameters and save the file. 
 
 
 #### dim agent ####
@@ -211,11 +185,7 @@ year_number
 from cte_date
 ```
 
-- The dbt_date macro comes from the below package. Create a packages.yml file in the same folder as your dbt_project.yml file. Paste this in the packages.yml file:
-
-  - package: calogica/dbt_date
-    version: [">=0.9.0", "<0.10.0"]
-
+- The dbt_date macro comes from the calogica/dbt_date package - we already installed this package in our packages.yml file. 
 - Then run `dbt deps`
 
 - Save the file, after you have done that, you can go to your terminal and type `dbt run -m dim_date` to build the model.
@@ -274,7 +244,39 @@ models:
 ## Create a semantic layer model (time permitting)
 - Create a model that can query from the data warehouse we just built and reference upstream models.
 - Create a new file called `claims.sql` inside of the insurance directory.
-<!-- - In order to view lineage, the dbt power user extension must be installed. Click on the Lineage tab in vscode (down by the terminal on the bottom), if you are inside the claims.sql model, you should be able to see lineage for that model. View the lineage for the other files in the model as well.  -->
+
+```
+
+  {{ config(
+    materialized = 'table',
+    schema = 'dw_insurance'
+    )
+}}
+
+
+SELECT
+c.firstname as customer_first_name,
+c.lastname as customer_last_name,
+d.date_day,
+p.policyid,
+a.firstname as agent_first_name,
+a.lastname as agent_last_name,
+f.claimamount
+FROM {{ ref('fact_claim') }} f
+
+LEFT JOIN {{ ref('dim_customer') }} c
+    ON f.customer_key = c.customer_key
+
+LEFT JOIN {{ ref('dim_agent') }} a
+    ON f.agent_key = a.agent_key
+
+LEFT JOIN {{ ref('dim_policy') }} p
+    ON f.policy_key = p.policy_key
+
+LEFT JOIN {{ ref('dim_date') }} d
+    ON f.date_key = d.date_key
+
+```
 
 ## View Lineage and Generate Docs ##
 - View Lineage for your semantic layer model by clicking on the model in the file explorer and clicking lineage on the bottom window.
@@ -282,6 +284,7 @@ models:
 - Run `dbt docs generate` in the command line
 - Click the docs icon to the right of the `Change branch` link.
 - Select the claims model from the project explorer on the left.
+
 
 ## Create a Pull Request on GitHub for the changes you have made ##
 - Click Save on any files that you have made changes in.
@@ -292,5 +295,4 @@ models:
 - Review your changes and click `Create pull request`
 - Type a description about the changes you are proposing to the project.
 - Click `Create Pull Request`
-- Before merging the Pull Request, you need to get 1 reviewer from someone in the class.
-- Copy the link for this page from your browser and link it to the discussion post. Ask for someone to review your pull request. Once someone has appoved your pull request, you can merge it into the main branch by clicking `Merge pull request`.
+- merge your branch into the main branch by clicking `Merge pull request`.
