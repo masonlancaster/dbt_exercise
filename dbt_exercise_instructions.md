@@ -10,7 +10,7 @@
     - Click 'Add Connection'
 - Search for and select 'Amazon RDS for PostgreSQL'
 - Select the destination you previously set up for Snowflake
-- Set the Destination schema prefix to `insurance`
+- Set the Destination schema prefix to `raw_insurance`
 - Set the Host to `database-1.c3ckkcekkkxp.us-east-1.rds.amazonaws.com`
 - Set the user to `fivetran_usr`
 - Set the password to `dw_fivetran`
@@ -31,13 +31,17 @@
     - Make sure the toggle on the top right is set to paused. If it's set to enabled, then click it and change it to paused.
 
 ### Transform (dbt) ###
+- Login to GitHub
+- Go to your repository you created when you set up dbt cloud
+- Click Branches
+    - New Branch
+    - Call the new branch 'Exercise_dbt_part1'
+    - Click Create New Branch
+
 - Login to dbt Cloud
-- Click Develop > Cloud IDE
-- Click Initialize dbt project
-    - All of the necessary dbt files and folders will be created
-- Click Commit and sync
-- Click 'Create New Branch'
-    - Name the branch `dbt-exercise`
+- Click Studio
+- Click 'Change Branch'
+    - Select the new branch we just created called 'Exericse_dbt_part1'
 - Right click on the macros directory and create a new file called `generate_schema_name.sql`. This macro will allow us to use custom schemas when we create models.
     - Copy and paste the following code into the newly created macro file:
 ```
