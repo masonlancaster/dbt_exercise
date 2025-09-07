@@ -10,7 +10,7 @@
     - Click 'Add Connection'
 - Search for and select 'Amazon RDS for PostgreSQL'
 - Select the destination you previously set up for Snowflake
-- Set the Destination schema prefix to `raw_insurance`
+- Set the Destination schema prefix to `insurance`
 - Set the Host to `database-1.c3ckkcekkkxp.us-east-1.rds.amazonaws.com`
 - Set the user to `fivetran_usr`
 - Set the password to `dw_fivetran`
