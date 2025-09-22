@@ -15,8 +15,8 @@ multiple sources into our datawarehouse and build some conformed dimensions.
 - Set the table group name to `customer_service_interactions`
 - Set the Bucket to `customer-service-interactions`
 - Set the access approach to `Access Key and Secret`
-- Set the Access Key ID to `AKIAWMFUPSE77NPC7GVH`
-- Set the Access Key Secret to `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`
+- Set the Access Key ID to the value provided in canvas
+- Set the Access Key Secret to the value provided in canvas
 - Click `+ Add files` under Configure files
 - Set the table name to `customer_service_interactions`
 - Click Save
