@@ -4,7 +4,6 @@ multiple sources into our datawarehouse and build some conformed dimensions.
 
 ![alt text](insurancedimensionalmodel_part2.png)
 
-- Now, we are going to use a semi-normalized transactional database given to us by Sarah's insurance company. Let's work through an ELT process for Sarah's insurance company using Airbyte and dbt. 
 ### Extract and Load (FiveTran) ###
 - Sign into fivetran
 - Click on 'Connections'
@@ -60,15 +59,15 @@ sources:
       - name: customer_service_interactions
 ```
 
-### This new table contains interactions between agents and customers. All of the agents in this file already exist in dim_agent, but there are additional
-### customers that do not yet exist in dim_customer. We will need to add these customers to the customer dimenension
+### This new table contains interactions between agents and customers. All of the agents in this file already exist in dim_agent, but there are additional customers that do not yet exist in dim_customer. We will need to add these customers to the customer dimenension
 
 We have been told by the business and those who maintain the source systems we are consuming from that we can match customers up based on their full name. There will not be multiple customers with the same exact full name. We will need to add these customer to the customers dimensions and de-duplicate them based on their full name.
 
 #### stg_customer_service_interactions
-- We are going to build a stg model for the new customer_service_interactions data. dbt recommends doing this for all of your sources.
-We are going to add it for this one specifically because we need to do some data parsing that we don't want to do multiple times if we use this data
-in multiple models downstream.
+- We are going to build a staging model for the new customer_service_interactions data. dbt recommends doing this for all of your sources.
+- We are going to add it for this one specifically because we need to do some data parsing that we don't want to do multiple times if we use this data in multiple models downstream.
+- Create a new file in your insurance directory called `stg_customer_service_interactions.sql`
+- Below is the code we will use to create that model.
 
 ```
 {{ config(
@@ -149,6 +148,8 @@ from final
 
 ```
 
+- Save the file, go to your terminal and run `dbt run -s dim_customer` to re-build the model
+
 
 #### fact_interaction ####
 - Create a new file inside of the insurance directory called `fact_interaction.sql`
@@ -159,29 +160,29 @@ from final
     schema = 'dw_insurance'
 ) }}
 
-SELECT
+select
     cu.customer_key,
     a.agent_key,
     d.date_key,
     c.call_duration,
     c.issue_type,
     c.resolution_status
-FROM {{ ref('stg_customer_service_interactions') }} c
-INNER JOIN {{ ref('dim_customer') }} cu 
-    ON c.customer_first_name = cu.firstname
+from {{ ref('stg_customer_service_interactions') }} c
+inner join {{ ref('dim_customer') }} cu 
+    on c.customer_first_name = cu.firstname
     and c.customer_last_name = cu.lastname
-INNER JOIN {{ ref('dim_agent') }} a 
-    ON c.agent_first_name = a.firstname
+inner join {{ ref('dim_agent') }} a 
+    on c.agent_first_name = a.firstname
     and c.agent_last_name = a.lastname
-INNER JOIN {{ ref('dim_date') }} d 
-    ON d.date_day = c.interaction_date
+inner join {{ ref('dim_date') }} d 
+    on d.date_day = c.interaction_date
 
 ```
 
-- Save the file, after you have done that, you can go to your terminal and type `dbt run -m fact_interaction` to build the model.
+- Save the file, after you have done that, you can go to your terminal and type `dbt run -s fact_interaction` to build the model.
     - Go to Snowflake to see the newly created table!
 
-- If for some reason you need to run all files then you can run: `dbt run -m insurance`.
+- If for some reason you need to run all files then you can run: `dbt run -s insurance`.
 
 #### Model Attributes YAML file ####
 - Update your model attributes file: `_schema_insurance.yml` with the new models we've created
@@ -216,3 +217,6 @@ models:
 - Type a description about the changes you are proposing to the project.
 - Click `Create Pull Request`
 - merge your branch into the main branch by clicking `Merge pull request`.
+
+## Submit a screenshot of the code for you new fact_interactions model in dbt
+## Submit a second screenshot showing a select * from fact_interaction in Snowflake
