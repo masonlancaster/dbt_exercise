@@ -1,5 +1,5 @@
 # dbt Exercise Instructions #
-- Let's jump into a ELT demo using Airbyte and dbt. Remember the insurance exercise where we took an insurance transaction and created a dimensional model based on the given business process and transaction? We decided on the below dimensional model:
+- Let's jump into a ELT demo using Fivetran and dbt. Remember the insurance exercise where we took an insurance transaction and created a dimensional model based on the given business process and transaction? We decided on the below dimensional model:
 
 ![alt text](insurancedimensionalmodel.png)
 
