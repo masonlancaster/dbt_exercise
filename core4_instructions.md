@@ -1,4 +1,4 @@
-# Core #5 Instructions #
+# Core #4 Instructions #
 ## Objective ##
 - In this assignment, students will practice their fundamental dimensional modeling skills and ELT by creating and populating a star schema for a given business process and relational database.
 - For context, Core #3, #4, and #5 all build upon each other. 
