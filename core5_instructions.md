@@ -1,5 +1,5 @@
 # dbt Exercise Instructions #
-- Let's add data from another source into our Insurance data warehouse that we built in the preivous module. The goal here is to learn how to combine
+- Let's add data from another source into our Oliver data warehouse that we built in the preivous module. The goal here is to learn how to combine
 multiple sources into our datawarehouse and build some conformed dimensions.
 
 ![alt text](oliverdimmodel_part2.png)
@@ -40,8 +40,8 @@ multiple sources into our datawarehouse and build some conformed dimensions.
 - Click 'Change Branch'
     - Select the new branch we just created called 'Exericse_dbt_part2'
 
-- Open the model directory, open the insurance directory
-- Open up `_src_insurance.yml`
+- Open the model directory, open the oliver directory
+- Open up `_src_oliver.yml`
     - Add the new source to the file
 ```
 
@@ -51,7 +51,7 @@ multiple sources into our datawarehouse and build some conformed dimensions.
 
 #### stg_employee_certifications
 - Build a staging model for the new employee certification data.
-- Create a new file in your insurance directory called `stg_customer_service_interactions.sql`
+- Create a new file in your oliver directory called `stg_customer_service_interactions.sql`
 
 ##### TIPS
 - There is a json field in the source table called `certification_json`
@@ -66,7 +66,7 @@ multiple sources into our datawarehouse and build some conformed dimensions.
 
 
 #### fact_certification ####
-- Create a new file inside of the insurance directory called `fact_certification.sql`
+- Create a new file inside of the oliver directory called `fact_certification.sql`
 - This fact will contain keys from the following dimensions:
     - dim_date
     - dim_employee
@@ -80,7 +80,7 @@ This fact will contain the following metrics:
 ```
 
 #### Model Attributes YAML file ####
-- Update your model attributes file: `_schema_insurance.yml` with the new models we've created
+- Update your model attributes file: `_schema_oliver.yml` with the new models we've created
 - Add a description for the new stg model and the new fact
     - Explain the grain of the fact in your description
 ```
