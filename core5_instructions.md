@@ -70,7 +70,7 @@ multiple sources into our datawarehouse and build some conformed dimensions.
 - This fact will contain keys from the following dimensions:
     - dim_date
     - dim_employee
-This fact will contain the following metrics:
+- This fact will contain the following metrics:
     - certification_name
     - certification_cost
 
