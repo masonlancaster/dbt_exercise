@@ -2,7 +2,7 @@
 - Let's add data from another source into our Insurance data warehouse that we built in the preivous module. The goal here is to learn how to combine
 multiple sources into our datawarehouse and build some conformed dimensions.
 
-![alt text](insurancedimensionalmodel_part2.png)
+![alt text](oliverdimmodel_part2.png)
 
 ### Extract and Load (FiveTran) ###
 - Sign into fivetran
@@ -202,9 +202,14 @@ models:
   - name: fact_claim
     description: "Insurance Claim Fact"
   - name: stg_customer_service_interactions
-    description: "Staging model for customer service interactions"
+    description: |
+      Staging model for customer service interactions.
+      Each record represents a call between a customer and an agent.
   - name: fact_interaction
-    description: "Customer Service Interaction Fact"
+    description: |
+      Customer Service Interaction Fact.
+      The grain of this table is customer + agent + date
+      Each record represents a call between a customer and an agent on a given date.
 ```
 
 ## Create a Pull Request on GitHub for the changes you have made ##
