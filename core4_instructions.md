@@ -1,10 +1,6 @@
 # Core #4 Instructions #
 ## Objective ##
 - In this assignment, students will practice their fundamental dimensional modeling skills and ELT by creating and populating a star schema for a given business process and relational database.
-- For context, Core #3, #4, and #5 all build upon each other. 
-     - Core #3: You created a draft dimensional model in LucidChart based on a given business process and transaction. 
-     - Core #4: You will populate your draft dimensional model (and act upon any feedback received) from a dataset provided to you via a file. 
-     - Core #5: You will use FiveTran to pull in all of Oliver’s relational database data from an Amazon RDS Postgres instance and then use dbt to transform and populate our final dimensional model. HINT! The dbt exercise we completed in class will be EXTREMELY helpful as you complete the assignment. 
 
 ## Background & Data ##
 - Oliver’s sweets and drinks serves a variety of products, including coffee, a variety of sodas, popcorn, and other tasty treats. Oliver’s currently has a transactional database system to track all store purchases across their 10 stores. They are now interested in developing a data warehouse using dimensional modeling (star schema) to improve their data analysis capabilities.  You will be modeling the point-of-sale business process at Oliver’s. You have already created a sample dimensional model and populated it for Oliver’s by uploading files of data. Now, after creating the dimensional model and showing it to Oliver’s data team, they have settled on the below dimensional model design. 
