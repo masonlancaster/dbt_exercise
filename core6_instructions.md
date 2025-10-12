@@ -56,6 +56,17 @@
 
 ```
 
+## Create a Pull Request on GitHub for the changes you have made ##
+- Click Save on any files that you have made changes in.
+- Click `Commit and Sync`
+- Type a commit message explaining the changes you've made. Click `Commit Changes`.
+- Click `Create a pull request on GitHub`
+    - You will be redirected to GitHub
+- Review your changes and click `Create pull request`
+- Type a description about the changes you are proposing to the project.
+- Click `Create Pull Request`
+- merge your branch into the main branch by clicking `Merge pull request`.
+
 ### Scheduling ###
 
 #### Fivetran ####
@@ -78,14 +89,3 @@
 - Click the running job to view the results to ensure it runs successfully
 
 - __Submit a screenshot of the completion of your job showing each model/test that ran successfully__
-
-## Create a Pull Request on GitHub for the changes you have made ##
-- Click Save on any files that you have made changes in.
-- Click `Commit and Sync`
-- Type a commit message explaining the changes you've made. Click `Commit Changes`.
-- Click `Create a pull request on GitHub`
-    - You will be redirected to GitHub
-- Review your changes and click `Create pull request`
-- Type a description about the changes you are proposing to the project.
-- Click `Create Pull Request`
-- merge your branch into the main branch by clicking `Merge pull request`.
