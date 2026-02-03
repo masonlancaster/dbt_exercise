@@ -133,8 +133,23 @@ code .
 ```
 
 ---
+---
 
-## Part 8 – Make a Change
+## Part 8 – Create a New Branch
+
+Before making any changes, create a new branch.
+
+In the VS Code terminal: ```git checkout -b add-readme-content```
+
+This creates a branch named `add-readme-content` and switches to it.
+
+Check your branch: ```git branch```
+
+The current branch will have a * next to it.
+
+---
+
+## Part 9 – Make a Change
 
 Open `README.md` in VS Code and add:
 ```
@@ -149,14 +164,122 @@ Save the file.
 
 ---
 
-## Part 9 – Commit and Push
+## Part 10 – Commit and Push to Your Branch
 
-In the VS Code terminal: 
+Stage files: ```git add .```
+
+Commit: ```git commit -m “added content to readme”```
+
+Push your branch to GitHub: ```git push -u origin add-readme-content```
+
+---
+
+## Part 11 – Create a Pull Request
+
+1. Go to your repository on GitHub  
+2. You should see a message about your recently pushed branch  
+3. Click **Compare & pull request**
+
+OR
+
+1. Click the **Pull requests** tab  
+2. Click **New pull request**  
+3. Select:
+   - Base branch: `main`
+   - Compare branch: `add-readme-content`
+
+4. Click **Create pull request**
+
+---
+
+## Part 12 – Add a Comment and Merge
+
+1. In the pull request page, write a short comment such as:
 ```
-git add .
-git commit -m “updated readme”
-git push
+Added introductory content to README file.
 ```
+
+2. Click **Merge pull request**  
+3. Click **Confirm merge**
+
+Your changes are now merged into the main branch.
+
+---
+
+## Part 13 – Pull Latest Changes Locally (Optional)
+
+Back in VS Code terminal:
+
+```
+git checkout main
+git pull
+```
+
+This updates your local main branch with the merged changes.
+
+---
+
+## How Branches and Pull Requests Work
+
+### What is a Branch?
+
+A branch is a separate version of the code.
+
+- The `main` branch usually contains the official, stable code which runs in production 
+- New work is done in separate branches  
+
+This allows people to:
+
+- Work without breaking main code  
+- Test changes safely  
+- Work in parallel with others  
+
+Example:
+
+- main → production-ready code  
+- feature-login → new login feature  
+- bugfix-header → fix a bug  
+
+---
+
+### What is a Pull Request (PR)?
+
+A pull request is a request to:
+
+👉 Merge changes from one branch into another (usually into `main`)
+
+It allows:
+
+- Code review  
+- Discussion  
+- Testing before merging  
+
+---
+
+## How This Works in a Team Workflow
+
+In a real software or data engineering team:
+
+1. A developer creates a branch for a task  ```git checkout -b feature-new-report```
+
+2. They make changes and commit them  
+
+3. They push the branch to GitHub  
+
+4. They open a pull request  
+
+5. Teammates review the code and leave comments  
+
+6. Once approved, the PR is merged into main  
+
+---
+
+### Why Teams Use This Process
+
+✅ Prevents breaking production code  
+✅ Encourages collaboration  
+✅ Keeps history organized  
+✅ Allows review and quality control  
 
 ---
 
@@ -164,6 +287,5 @@ git push
 
 Submit:
 
-- The link to your GitHub repository
-
-
+- Link to your GitHub repository  
+- Screenshot of your merged pull request
