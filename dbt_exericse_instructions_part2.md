@@ -2,7 +2,7 @@
 - Let's add data from another source into our Insurance data warehouse that we built in the preivous module. The goal here is to learn how to combine
 multiple sources into our datawarehouse and build some conformed dimensions.
 
-![alt text](oliverdimmodel_part2.png)
+![alt text](insurancedimensionalmodel_part2.png)
 
 ### Extract and Load (FiveTran) ###
 - Sign into fivetran
