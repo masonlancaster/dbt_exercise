@@ -8,18 +8,10 @@ multiple sources into our datawarehouse and build some conformed dimensions.
 - Sign into fivetran
 - Click on 'Connections'
     - Click 'Add Connection'
-- Search for and select 'Amazon S3'
+- Search for and select 'Google Drive'
 - Select the destination you previously set up for Snowflake
 - Set the Destination schema to `oliver_dw_source`
-- Set the table group name to `employee_certifications`
-- Set the Bucket to `employee-certifications`
-- Set the access approach to `Access Key and Secret`
-- Set the Access Key ID to the value provided in canvas
-- Set the Access Key Secret to the value provided in canvas
-- Click `+ Add files` under Configure files
-- Set the table name to `employee_certifications`
-- Click Save
-- Under format, set File Type to csv
+- Set Folder URL to `https://drive.google.com/drive/folders/1UhbjTQOsvUKHmK2BrJ3CM0idSK0PW160?usp=sharing`
 - Click Save & Test
 - Click 'Sync Now' in the top right corner
 - Wait for the sync to finish, login to Snowflake, check to see if you have a new schema in your database called `oliver_dw_source`
