@@ -16,14 +16,15 @@
 - Sign into fivetran
 - Click on 'Connections'
     - Click 'Add Connection'
-- Search for and select 'Amazon RDS for PostgreSQL'
+- Search for and select 'PostgreSQL'
 - Select the destination you previously set up for Snowflake
 - Set the Destination schema prefix to `oliver`
+- Set Destination Names to `Source Mapping`
 - Set the Host to `ep-purple-leaf-akxwxj9v-pooler.c-3.us-west-2.aws.neon.tech`
+- Set the database to `oliver`
 - Set the user to `fivetran_usr`
 - Set the password to `$dw_fivetran`
-- Set the database to `oliver`
-- Set Update Method to 'Detect Changes via Fivetran Teleport Sync'
+- Set the incremental sync method to `Query-Based`
 - Click 'Save & Test'
 - Click 'Continue' even if it says 'XMIN extensions not enabled'
 - When you get to the Select Data to Sync page, make sure that the following 6 tables are selected and click 'Save & Continue':
