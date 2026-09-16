@@ -11,9 +11,9 @@
 - Search for and select 'Amazon RDS for PostgreSQL'
 - Select the destination you previously set up for Snowflake
 - Set the Destination schema prefix to `insurance`
-- Set the Host to `database-1.c3ckkcekkkxp.us-east-1.rds.amazonaws.com`
+- Set the Host to `ep-purple-leaf-akxwxj9v-pooler.c-3.us-west-2.aws.neon.tech`
 - Set the user to `fivetran_usr`
-- Set the password to `dw_fivetran`
+- Set the password to `$dw_fivetran`
 - Set the database to `insurance`
 - Set Update Method to 'Detect Changes via Fivetran Teleport Sync'
 - Click 'Save & Test'
