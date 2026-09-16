@@ -18,7 +18,6 @@
 - Set the password to `$dw_fivetran`
 - Set the incremental sync method to `Query-Based`
 - Click 'Save & Test'
-- Click 'Continue' even if it says 'XMIN extensions not enabled'
 - When you get to the Select Data to Sync page, make sure that the following 4 tables are selected and click 'Save & Continue':
     - agents
     - claims
